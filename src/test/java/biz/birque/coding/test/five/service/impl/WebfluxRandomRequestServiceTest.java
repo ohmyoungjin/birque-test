@@ -16,13 +16,10 @@ import java.util.Map;
 @WebFluxTest(RandomRequestService.class)
 class WebfluxRandomRequestServiceTest {
     private int requestCount;
-
     @Autowired
     RandomRequestService randomRequestService;
-
     @TestConfiguration
     static class WebClientTestConfig {
-
         @Bean
         public WebClient webClient() {
             return WebClient.builder()
@@ -36,7 +33,7 @@ class WebfluxRandomRequestServiceTest {
 
 
     @Test
-    void 랜덤숫자요청() {
+    void 랜덤문구요청() {
         Map<Integer, List<String>> randomResponse = randomRequestService.RandomResponse(requestCount);
         int totalCount = randomResponse.values().stream()
                 .mapToInt(List::size)

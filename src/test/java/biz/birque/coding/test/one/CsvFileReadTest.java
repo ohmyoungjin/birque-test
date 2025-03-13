@@ -13,7 +13,7 @@ class CsvFileReadTest {
     private CsvFileRead csvFileRead;
 
     @Test
-    void 문제해결() {
+    void CSV_파일읽기() {
         csvFileRead.csvRead();
     }
 }

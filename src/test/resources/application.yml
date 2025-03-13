@@ -1,0 +1,9 @@
+spring:
+  application:
+    name: brique-coding-test
+
+  profiles:
+    include:
+      - datasource
+  main:
+    allow-bean-definition-overriding: true

@@ -1,0 +1,33 @@
+spring:
+  jpa:
+    open-in-view: false
+    generate-ddl: false
+    properties:
+      hibernate.hbm2ddl.import_files_sql_extractor: org.hibernate.tool.hbm2ddl.MultipleLinesSqlCommandExtractor
+      hibernate.default_batch_fetch_size: ${chunkSize:1000}
+      hibernate.connection.provider_disables_autocommit: true
+      hibernate.jdbc.batch_size: ${chunkSize:1000}
+      hibernate.order_inserts: true
+      hibernate.order_updates: true
+      hibernate.globally_quoted_identifiers: true
+      hibernate.jdbc.time_zone: Asia/Seoul
+      hibernate.format_sql: true
+      hibernate.highlight_sql: true
+      hibernate.use_sql_comments: true
+---
+
+
+spring:
+  datasource:
+    url: jdbc:mariadb://codingtest.brique.kr/employees
+    username: codingtest
+    password: 12brique!@
+    driver-class-name: org.mariadb.jdbc.Driver  # MariaDB 드라이버
+
+  jpa:
+    database-platform: org.hibernate.dialect.MariaDBDialect  # MariaDB용 Hibernate Dialect
+    hibernate:
+      ddl-auto: none  # (옵션) 자동 테이블 생성 설정 (none / validate / update / create-drop)
+
+
+

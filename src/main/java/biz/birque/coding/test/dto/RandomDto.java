@@ -1,4 +1,4 @@
-package biz.birque.coding.test.five.dto;
+package biz.birque.coding.test.dto;
 
 import lombok.*;
 
@@ -7,6 +7,9 @@ import lombok.*;
 @Builder
 @AllArgsConstructor
 @ToString
+/**
+ * 요청에 대한 응답 객체
+ */
 public class RandomDto {
 
     private int id;

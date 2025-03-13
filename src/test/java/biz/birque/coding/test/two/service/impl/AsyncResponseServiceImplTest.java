@@ -37,11 +37,10 @@ class AsyncResponseServiceImplTest {
         long startTime = System.currentTimeMillis();
 
         String one = asyncResponseService.syncResponse("Ping");
-        String two = asyncResponseService.syncResponse("Ping");
-        String three = asyncResponseService.syncResponse("Ping");
-
         System.out.println("Send " + one);
+        String two = asyncResponseService.syncResponse("Ping");
         System.out.println("Send " + two);
+        String three = asyncResponseService.syncResponse("Ping");
         System.out.println("Send " + three);
 
         long endTime = System.currentTimeMillis();
