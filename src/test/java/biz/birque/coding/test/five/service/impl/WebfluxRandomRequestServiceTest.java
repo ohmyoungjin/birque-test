@@ -30,13 +30,13 @@ class WebfluxRandomRequestServiceTest {
         }
     }
     @BeforeEach
-    public void setUp() {
+    void setUp() {
         requestCount = 132; //요청횟수 설정
     }
 
 
     @Test
-    void randomResponse() {
+    void 랜덤숫자요청() {
         Map<Integer, List<String>> randomResponse = randomRequestService.RandomResponse(requestCount);
         int totalCount = randomResponse.values().stream()
                 .mapToInt(List::size)

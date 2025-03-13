@@ -16,8 +16,8 @@ public class AsyncResponseServiceImpl implements AsyncResponseService {
 
     @Async
     @Override
-    public CompletableFuture<String> textResponse(String text) {
-        System.out.println("Received " + text);
+    public CompletableFuture<String> asyncResponse(String text) {
+        System.out.println("Received : " + text);
         return CompletableFuture.supplyAsync(() -> {
             try {
                 Thread.sleep(3000);
@@ -27,5 +27,17 @@ public class AsyncResponseServiceImpl implements AsyncResponseService {
             }
             return PING.equals(text) ? PONG : text;
         });
+    }
+
+    @Override
+    public String syncResponse(String text) {
+        try {
+            System.out.println("Received : " + text );
+            Thread.sleep(3000L);
+            return PING.equals(text) ? PONG : text;
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+            throw new RuntimeException("Thread was interrupted", e);
+        }
     }
 }

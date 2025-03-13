@@ -5,5 +5,7 @@ import java.util.concurrent.CompletableFuture;
 
 public interface AsyncResponseService {
 
-    CompletableFuture<String> textResponse(String text);
+    CompletableFuture<String> asyncResponse(String text);
+
+    String syncResponse(String text);
 }

@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>기온 및 습도 입력</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    .chart-div {
+      width: 90%;
+      height: 90%;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: row;
+      flex-wrap: nowrap;
+      justify-content: space-around;
+      align-items: center;
+    }
+  </style>
+</head>
+<body>
+<div class="chart-div">
+  <div class="chart-table">
+    <table border="1">
+      <tr>
+        <th>월</th>
+        <th>평균 기온 (°C)</th>
+        <th>평균 습도 (%)</th>
+      </tr>
+      <tr><td>1월</td><td><input type="number" id="temp1" oninput="updateChart()"></td><td><input type="number" id="humidity1" oninput="updateChart()"></td></tr>
+      <tr><td>2월</td><td><input type="number" id="temp2" oninput="updateChart()"></td><td><input type="number" id="humidity2" oninput="updateChart()"></td></tr>
+      <tr><td>3월</td><td><input type="number" id="temp3" oninput="updateChart()"></td><td><input type="number" id="humidity3" oninput="updateChart()"></td></tr>
+      <tr><td>4월</td><td><input type="number" id="temp4" oninput="updateChart()"></td><td><input type="number" id="humidity4" oninput="updateChart()"></td></tr>
+      <tr><td>5월</td><td><input type="number" id="temp5" oninput="updateChart()"></td><td><input type="number" id="humidity5" oninput="updateChart()"></td></tr>
+      <tr><td>6월</td><td><input type="number" id="temp6" oninput="updateChart()"></td><td><input type="number" id="humidity6" oninput="updateChart()"></td></tr>
+      <tr><td>7월</td><td><input type="number" id="temp7" oninput="updateChart()"></td><td><input type="number" id="humidity7" oninput="updateChart()"></td></tr>
+      <tr><td>8월</td><td><input type="number" id="temp8" oninput="updateChart()"></td><td><input type="number" id="humidity8" oninput="updateChart()"></td></tr>
+      <tr><td>9월</td><td><input type="number" id="temp9" oninput="updateChart()"></td><td><input type="number" id="humidity9" oninput="updateChart()"></td></tr>
+      <tr><td>10월</td><td><input type="number" id="temp10" oninput="updateChart()"></td><td><input type="number" id="humidity10" oninput="updateChart()"></td></tr>
+      <tr><td>11월</td><td><input type="number" id="temp11" oninput="updateChart()"></td><td><input type="number" id="humidity11" oninput="updateChart()"></td></tr>
+      <tr><td>12월</td><td><input type="number" id="temp12" oninput="updateChart()"></td><td><input type="number" id="humidity12" oninput="updateChart()"></td></tr>
+    </table>
+    <button onclick="generateRandomData()">랜덤 데이터 생성</button>
+  </div>
+  <div class="chart-canvas">
+    <canvas id="myChart" width="400" height="400"></canvas>
+  </div>
+</div>
+<script>
+  const ctx = document.getElementById('myChart').getContext('2d');
+  let myChart;
+
+  function updateChart() {
+    const labels = ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'];
+    const temperatures = [];
+    const humidities = [];
+
+    for (let i = 1; i <= 12; i++) {
+      temperatures.push(parseFloat(document.getElementById(`temp${i}`).value) || 0);
+      humidities.push(parseFloat(document.getElementById(`humidity${i}`).value) || 0);
+    }
+
+    if (myChart) {
+      myChart.destroy();
+    }
+
+    myChart = new Chart(ctx, {
+      type: 'line',
+      data: {
+        labels: labels,
+        datasets: [
+          {
+            label: '평균 기온 (°C)',
+            data: temperatures,
+            borderColor: 'rgba(255, 99, 132, 1)',
+            borderWidth: 2,
+            fill: false
+          },
+          {
+            label: '평균 습도 (%)',
+            data: humidities,
+            borderColor: 'rgba(54, 162, 235, 1)',
+            borderWidth: 2,
+            fill: false
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        scales: {
+          y: {
+            beginAtZero: true
+          }
+        }
+      }
+    });
+  }
+
+  function generateRandomData() {
+    for (let i = 1; i <= 12; i++) {
+      const randomTemp = (Math.random() * 30).toFixed(1); // 0°C ~ 30°C
+      const randomHumidity = (Math.random() * 100).toFixed(1); // 0% ~ 100%
+      document.getElementById(`temp${i}`).value = randomTemp;
+      document.getElementById(`humidity${i}`).value = randomHumidity;
+    }
+    updateChart(); // 랜덤 데이터 생성 후 그래프 업데이트
+  }
+</script>
+</body>
+</html>

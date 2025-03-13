@@ -6,6 +6,7 @@ import org.apache.commons.csv.CSVParser;
 import org.apache.commons.csv.CSVRecord;
 import org.apache.commons.math3.stat.StatUtils;
 import org.apache.commons.math3.stat.descriptive.rank.Median;
+import org.springframework.stereotype.Service;
 
 import java.io.*;
 import java.net.HttpURLConnection;
@@ -14,11 +15,12 @@ import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 @Slf4j
-public class test {
+@Service
+public class CsvFileRead {
     private static final String FILE_ID = "1Ah0gkauGCIqJHpFGhTgsEZCjYFRscjTh";
     private static final String DOWNLOAD_URL = "https://drive.google.com/uc?export=download&id=" + FILE_ID;
 
-    public static void main(String[] args) {
+    public void csvRead() {
         try {
             File file = downloadCsv(DOWNLOAD_URL);
             processCsv(file);
@@ -26,8 +28,7 @@ public class test {
             e.printStackTrace();
         }
     }
-
-    public static File downloadCsv(String fileUrl) throws IOException {
+    public File downloadCsv(String fileUrl) throws IOException {
         URL url = new URL(fileUrl);
         HttpURLConnection connection = (HttpURLConnection) url.openConnection();
         connection.setRequestMethod("GET");
@@ -52,7 +53,7 @@ public class test {
 
 
 
-    public static void processCsv(File file) throws IOException {
+    public void processCsv(File file) throws IOException {
         List<List<String>> invalidValues = new ArrayList<>();
         int totalCount = 0;      // 전체 숫자 개수
         try (Reader reader = new FileReader(file, StandardCharsets.UTF_8);
@@ -78,7 +79,7 @@ public class test {
         printResult(totalCount, invalidValues); // 결과 출력
     }
 
-    private static void printStatistics(List<Double> numbers) {
+    private void printStatistics(List<Double> numbers) {
         double[] data = numbers.stream().mapToDouble(Double::doubleValue).toArray();
         double min = StatUtils.min(data);
         double max = StatUtils.max(data);
@@ -90,7 +91,7 @@ public class test {
                 min, max, sum, avg, stdDev, median);
     }
 
-    private static void printResult(int totalCount, List<List<String>> invalidValues) {
+    private void printResult(int totalCount, List<List<String>> invalidValues) {
         System.out.println("------------------------------------");
         System.out.printf("The total number of lines: %d", totalCount);
         System.out.println();
