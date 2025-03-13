@@ -5,6 +5,9 @@ import org.springframework.stereotype.Service;
 
 import java.util.Stack;
 
+/**
+ * Stack 이용하여 문제 해결
+ */
 @Service
 public class AlgorithmStack implements Algorithm {
 

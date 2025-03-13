@@ -9,7 +9,9 @@ import org.qlrm.mapper.JpaResultMapper;
 import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.context.annotation.Bean;
 
-
+/**
+ * Test 전용 Config 설정
+ */
 @TestConfiguration
 public class TestJpaConfig {
     @PersistenceContext

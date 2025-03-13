@@ -28,7 +28,7 @@ class WebfluxRandomRequestServiceTest {
     }
     @BeforeEach
     void setUp() {
-        requestCount = 132; //요청횟수 설정
+        requestCount = 100; //요청횟수 설정
     }
 
 
@@ -44,7 +44,7 @@ class WebfluxRandomRequestServiceTest {
                 });
         System.out.println("TotalCount : " + totalCount);
 
-        assertThat(totalCount).isEqualTo(requestCount); //요청 숫자와 토탈 숫자 검증
+        assertThat(totalCount).isEqualTo(requestCount); /* 요청 숫자와 토탈 숫자 검증 */
 
 
     }

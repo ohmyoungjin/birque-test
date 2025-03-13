@@ -13,15 +13,16 @@ public class AsyncResponseServiceImpl implements AsyncResponseService {
 
     private final String PING = "Ping";
     private final String PONG = "Pong";
-    final Long SLEEP_TIME = 3000L;
+    final Long TREAD_SLEEP_TIME = 3000L;
 
+    /* 비동기 처리 */
     @Async
     @Override
     public CompletableFuture<String> asyncResponse(String text) {
         System.out.println("Received : " + text);
         return CompletableFuture.supplyAsync(() -> {
             try {
-                Thread.sleep(SLEEP_TIME);
+                Thread.sleep(TREAD_SLEEP_TIME);
             } catch (InterruptedException e) {
                 Thread.currentThread().interrupt();
                 return "Error: " + e.getMessage();
@@ -30,11 +31,12 @@ public class AsyncResponseServiceImpl implements AsyncResponseService {
         });
     }
 
+    /* 동기 처리 */
     @Override
     public String syncResponse(String text) {
         try {
             System.out.println("Received : " + text );
-            Thread.sleep(SLEEP_TIME);
+            Thread.sleep(TREAD_SLEEP_TIME);
             return PING.equals(text) ? PONG : text;
         } catch (InterruptedException e) {
             Thread.currentThread().interrupt();
